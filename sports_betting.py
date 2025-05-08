@@ -6,11 +6,17 @@ import json
 from oauth2client.service_account import ServiceAccountCredentials
 
 
-# --- Google Sheets 連携 ---
+# --- Google Sheets 連携（Streamlit Cloud対応） ---
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+
+# secrets.toml からJSONを読み込み
 credentials_dict = json.loads(st.secrets["GSPREAD_CREDENTIALS"])
 credentials = ServiceAccountCredentials.from_json_keyfile_dict(credentials_dict, scope)
+
+# gspread認証
 gc = gspread.authorize(credentials)
+
+# スプレッドシートとシートを開く
 sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1i7aGvgKURjx9wZlz7txRcpweYa_zo-0sT08ekCZFRYA/edit")
 worksheet = sh.worksheet("シート1")
 
