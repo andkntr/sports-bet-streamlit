@@ -2,11 +2,14 @@ import streamlit as st
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
+import json
+from oauth2client.service_account import ServiceAccountCredentials
+
 
 # --- Google Sheets 連携 ---
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-credentials_path = r"C:\\Users\\kentaro.ando\\Documents\\python\\sumareji\\credentials.json"
-credentials = ServiceAccountCredentials.from_json_keyfile_name(credentials_path, scope)
+credentials_dict = json.loads(st.secrets["GSPREAD_CREDENTIALS"])
+credentials = ServiceAccountCredentials.from_json_keyfile_dict(credentials_dict, scope)
 gc = gspread.authorize(credentials)
 sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1i7aGvgKURjx9wZlz7txRcpweYa_zo-0sT08ekCZFRYA/edit")
 worksheet = sh.worksheet("シート1")
