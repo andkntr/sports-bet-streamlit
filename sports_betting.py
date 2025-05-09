@@ -125,9 +125,24 @@ def betting_page():
 
     # ベットカード
     st.markdown("""<div class="bet-card"><h2>勝者とスコアを予想しよう！</h2>""", unsafe_allow_html=True)
-
+    
     st.markdown("<h3 style='text-align:center;'>勝者を選択してください</h3>", unsafe_allow_html=True)
-    predicted_winner = st.radio("", options=["オクラホマシティ・サンダー", "デンバー・ナゲッツ"], horizontal=True)
+    
+    # ✅ ラジオボタン中央寄せ（このブロックを差し込む）
+    st.markdown("""
+    <div style='display: flex; justify-content: center;'>
+        <div>
+    """, unsafe_allow_html=True)
+    
+    predicted_winner = st.radio(
+        label="",
+        options=["オクラホマシティ・サンダー", "デンバー・ナゲッツ"],
+        horizontal=True,
+        key="winner_radio"
+    )
+    
+    st.markdown("</div></div>", unsafe_allow_html=True)
+
 
 
     if predicted_winner:
