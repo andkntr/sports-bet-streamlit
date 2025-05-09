@@ -40,7 +40,7 @@ def auth_page():
         key="auth_id"
     )
     nickname_input = st.text_input("ニックネーム（結果発表時にお呼びします）", key="nickname_input")
-    password = st.text_input("合言葉（チラシをご確認ください。）", type="password")
+    password = st.text_input("合言葉（チラシをご確認ください）", type="password")
 
     if st.button("認証して予想へ進む"):
         if input_id.strip() and nickname.strip() and password.strip():
@@ -144,11 +144,6 @@ def betting_page():
     # 提出処理
     submit = st.button("この内容で予想を提出", use_container_width=True)
     if submit:
-        existing_ids = [row['TOTTEI ID'] for row in worksheet.get_all_records()]
-        if st.session_state.tottei_id in map(str, existing_ids):
-            st.error("⚠️ このTOTTEI IDではすでに予想が送信されています。")
-            st.stop()
-
         if predicted_winner and okc_score is not None and den_score is not None:
             now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             worksheet.append_row([
