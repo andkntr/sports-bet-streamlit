@@ -39,7 +39,7 @@ def auth_page():
         "TOTTEIアプリのトップ画面に表示されている「TOTTEI ID」を入力してください。（例：1000001234 の場合 → 1234）", 
         key="auth_id"
     )
-    nickname = st.text_input("ニックネーム（結果発表時にお呼びします）", key="nickname")
+    nickname_input = st.text_input("ニックネーム（結果発表時にお呼びします）", key="nickname_input")
     password = st.text_input("合言葉（チラシをご確認ください。）", type="password")
 
     if st.button("認証して予想へ進む"):
@@ -47,7 +47,7 @@ def auth_page():
             if password.strip().lower() == "kobe":
                 st.session_state.authenticated = True
                 st.session_state.tottei_id = input_id.strip()
-                st.session_state.nickname = nickname.strip()
+                st.session_state.nickname = nickname_input.strip()
             else:
                 st.error("合言葉が違います。")
         else:
