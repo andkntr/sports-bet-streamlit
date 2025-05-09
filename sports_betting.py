@@ -44,7 +44,7 @@ def auth_page():
 
     if st.button("認証して予想へ進む"):
         if input_id.strip() and nickname_input.strip() and password.strip():
-            if password.strip().lower() == "kobe":
+            if password.strip().lower() == "ヨキッチ":
                 st.session_state.authenticated = True
                 st.session_state.tottei_id = input_id.strip()
                 st.session_state.nickname = nickname_input.strip()
