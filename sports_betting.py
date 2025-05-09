@@ -43,7 +43,7 @@ def auth_page():
     password = st.text_input("合言葉（チラシをご確認ください）", type="password")
 
     if st.button("認証して予想へ進む"):
-        if input_id.strip() and nickname.strip() and password.strip():
+        if input_id.strip() and nickname_input.strip() and password.strip():
             if password.strip().lower() == "kobe":
                 st.session_state.authenticated = True
                 st.session_state.tottei_id = input_id.strip()
