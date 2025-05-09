@@ -33,21 +33,26 @@ st.set_page_config(page_title="PLAY OFFS パブリックビューイング", lay
 # ---------------------
 def auth_page():
     st.title("🔐 TOTTEI 予想参加 認証")
-    st.write("TOTTEIアプリに表示されているIDと合言葉を入力してください。")
+    st.write("TOTTEIアプリに表示されているIDと合言葉、ニックネームを入力してください。")
 
-    input_id = st.text_input("TOTTEIアプリのトップ画面に表示されている「TOTTEI ID」を入力してください。（例：1000001234 の場合 → 1234）", key="auth_id")
+    input_id = st.text_input(
+        "TOTTEIアプリのトップ画面に表示されている「TOTTEI ID」を入力してください。（例：1000001234 の場合 → 1234）", 
+        key="auth_id"
+    )
+    nickname = st.text_input("ニックネーム（アリーナなどで表示される場合があります）", key="nickname")
     password = st.text_input("合言葉（チラシをご確認ください。）", type="password")
 
     if st.button("認証して予想へ進む"):
-        if input_id and password:
+        if input_id.strip() and nickname.strip() and password.strip():
             if password.strip().lower() == "kobe":
                 st.session_state.authenticated = True
                 st.session_state.tottei_id = input_id.strip()
-                # st.experimental_rerun() は不要
+                st.session_state.nickname = nickname.strip()
             else:
                 st.error("合言葉が違います。")
         else:
-            st.warning("両方の項目を入力してください。")
+            st.warning("TOTTEI ID・ニックネーム・合言葉のすべてを入力してください。")
+
 
 # ---------------------
 # ベッティングページ
@@ -146,7 +151,14 @@ def betting_page():
 
         if predicted_winner and okc_score is not None and den_score is not None:
             now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            worksheet.append_row([now, st.session_state.tottei_id, predicted_winner, okc_score, den_score])
+            worksheet.append_row([
+                now,
+                st.session_state.tottei_id,
+                st.session_state.nickname,
+                predicted_winner,
+                okc_score,
+                den_score
+            ])
 
             st.success(f"""✅ 送信完了！  
 TOTTEI ID：**{st.session_state.tottei_id}**  
