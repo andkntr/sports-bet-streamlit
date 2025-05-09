@@ -123,11 +123,25 @@ def betting_page():
             </div>
         """, unsafe_allow_html=True)
 
-    # ベットカード
-    st.markdown("""<div class="bet-card"><h2>勝者とスコアを予想しよう！</h2>""", unsafe_allow_html=True)
+        # ベットカード
+        st.markdown("""<div class="bet-card"><h2>勝者とスコアを予想しよう！</h2>""", unsafe_allow_html=True)
+        
+        # ラジオボタン中央揃え用CSS
+        st.markdown("""
+        <style>
+        div[data-testid="stRadio"] {
+            display: flex;
+            justify-content: center;
+        }
+        div[data-testid="stRadio"] label {
+            margin: 0 10px;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("<h3 style='text-align:center;'>勝者を選択してください</h3>", unsafe_allow_html=True)
+        predicted_winner = st.radio("", options=["オクラホマシティ・サンダー", "デンバー・ナゲッツ"], horizontal=True)
 
-    st.markdown("<h3 style='text-align:center;'>勝者を選択してください</h3>", unsafe_allow_html=True)
-    predicted_winner = st.radio("", options=["オクラホマシティ・サンダー", "デンバー・ナゲッツ"], horizontal=True)
 
     if predicted_winner:
         st.markdown(f"<p style='text-align:center;'>あなたの選択：<b style='color:#f87171'>{predicted_winner}</b></p>", unsafe_allow_html=True)
