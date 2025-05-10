@@ -32,7 +32,7 @@ st.set_page_config(page_title="PLAY OFFS パブリックビューイング", lay
 # 認証ページ
 # ---------------------
 def auth_page():
-    st.title("🔐 NBA PLAYOFSS勝敗予想 認証")
+    st.title("🔐 NBA PLAYOFFS勝敗予想 認証")
     st.write("TOTTEIアプリに表示されているIDと合言葉、ニックネームを入力してください。")
 
     input_id = st.text_input(
