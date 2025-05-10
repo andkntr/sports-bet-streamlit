@@ -26,7 +26,7 @@ worksheet = sh.worksheet("シート1")
 # ---------------------
 # ページ設定
 # ---------------------
-st.set_page_config(page_title="PLAY OFFS パブリックビューイング", layout="wide")
+st.set_page_config(page_title="PLAY OFFS パブリックビューイング")
 
 # ---------------------
 # 認証ページ
@@ -159,7 +159,7 @@ def betting_page():
         den_score = int(den_input) if den_input.isdigit() else None
 
     # 提出処理
-    submit = st.button("この内容で予想を提出", use_container_width=True)
+    submit = st.button("予想を送信", use_container_width=True)
     if submit:
         if predicted_winner and okc_score is not None and den_score is not None:
             now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
