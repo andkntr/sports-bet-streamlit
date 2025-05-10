@@ -180,8 +180,8 @@ TOTTEI ID：**{st.session_state.tottei_id}**
             try:
                 data = worksheet.get_all_records()
                 winner_counts = Counter([row['勝者予想'] for row in data])
-                okc_scores = [int(row['サンダースコア']) for row in data if str(row['サンダースコア']).isdigit()]
-                den_scores = [int(row['ナゲッツスコア']) for row in data if str(row['ナゲッツスコア']).isdigit()]
+                okc_scores = [int(row['ウルブズスコア']) for row in data if str(row['ウルブズスコア']).isdigit()]
+                den_scores = [int(row['ウォリアーズスコア']) for row in data if str(row['ウォリアーズスコア']).isdigit()]
                 avg_okc = round(sum(okc_scores) / len(okc_scores), 1) if okc_scores else "-"
                 avg_den = round(sum(den_scores) / len(den_scores), 1) if den_scores else "-"
 
