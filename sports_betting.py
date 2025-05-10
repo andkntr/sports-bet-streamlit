@@ -45,7 +45,7 @@ def auth_page():
 
     if st.button("認証して予想へ進む"):
         if input_id.strip() and nickname_input.strip() and password.strip():
-            if password.strip().lower() == "ヨキッチ":
+            if password.strip().lower() == "カリー":
                 st.session_state.authenticated = True
                 st.session_state.tottei_id = input_id.strip()
                 st.session_state.nickname = nickname_input.strip()
@@ -106,8 +106,8 @@ def betting_page():
     with col1:
         st.markdown("""
             <div style='text-align: center;'>
-                <img src='https://a.espncdn.com/i/teamlogos/nba/500/okc.png' width='150'>
-                <h4>オクラホマシティ・サンダー</h4>
+                <img src='https://a.espncdn.com/i/teamlogos/nba/500/MIN.png' width='150'>
+                <h4>ミネソタ・ティンバーウルブズ</h4>
             </div>
         """, unsafe_allow_html=True)
     with col2:
@@ -119,8 +119,8 @@ def betting_page():
     with col3:
         st.markdown("""
             <div style='text-align: center;'>
-                <img src='https://a.espncdn.com/i/teamlogos/nba/500/den.png' width='150'>
-                <h4>デンバー・ナゲッツ</h4>
+                <img src='https://a.espncdn.com/i/teamlogos/nba/500/gsw.png' width='150'>
+                <h4>ゴールデンステート・ウォリアーズ</h4>
             </div>
         """, unsafe_allow_html=True)
 
@@ -137,7 +137,7 @@ def betting_page():
     
     predicted_winner = st.radio(
         label="",
-        options=["オクラホマシティ・サンダー", "デンバー・ナゲッツ"],
+        options=["ミネソタ・ティンバーウルブズ", "ゴールデンステート・ウォリアーズ"],
         horizontal=True,
         key="winner_radio"
     )
@@ -152,10 +152,10 @@ def betting_page():
     st.markdown("<br><h3 style='text-align:center;'>予想スコアを入力してください</h3>", unsafe_allow_html=True)
     col4, col5 = st.columns(2)
     with col4:
-        okc_input = st.text_input("サンダーの得点予想", key="okc_score_input")
+        okc_input = st.text_input("ウルブズの得点予想", key="okc_score_input")
         okc_score = int(okc_input) if okc_input.isdigit() else None
     with col5:
-        den_input = st.text_input("ナゲッツの得点予想", key="den_score_input")
+        den_input = st.text_input("ウォリアーズの得点予想", key="den_score_input")
         den_score = int(den_input) if den_input.isdigit() else None
 
     # 提出処理
@@ -175,7 +175,7 @@ def betting_page():
             st.success(f"""✅ 送信完了！  
 TOTTEI ID：**{st.session_state.tottei_id}**  
 あなたの予想：**{predicted_winner} の勝利**  
-予想スコア：サンダー {okc_score} - {den_score} ナゲッツ""")
+予想スコア：ウルブズ {okc_score} - {den_score} ウォリアーズ""")
 
             try:
                 data = worksheet.get_all_records()
@@ -187,9 +187,9 @@ TOTTEI ID：**{st.session_state.tottei_id}**
 
                 st.markdown("---")
                 st.markdown("### 📊 みんなの予想集計")
-                st.markdown(f"- サンダー勝利予想：{winner_counts.get('オクラホマシティ・サンダー', 0)}件")
-                st.markdown(f"- ナゲッツ勝利予想：{winner_counts.get('デンバー・ナゲッツ', 0)}件")
-                st.markdown(f"- 平均予想スコア：サンダー {avg_okc} - {avg_den} ナゲッツ")
+                st.markdown(f"- ウルブズ勝利予想：{winner_counts.get('ミネソタ・ティンバーウルブズ', 0)}件")
+                st.markdown(f"- ウォリアーズ勝利予想：{winner_counts.get('ゴールデンステート・ウォリアーズ', 0)}件")
+                st.markdown(f"- 平均予想スコア：ウルブズ {avg_okc} - {avg_den} ウォリアーズ")
             except Exception as e:
                 st.error(f"集計データの取得に失敗しました: {e}")
         else:
